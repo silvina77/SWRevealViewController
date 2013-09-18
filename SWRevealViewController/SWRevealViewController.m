@@ -990,7 +990,28 @@ static NSString * const SWSegueRightIdentifier = @"sw_right";
     void (^rearDeploymentCompletion)() = [self _rearViewDeploymentForNewFrontViewPosition:newPosition];
     void (^rightDeploymentCompletion)() = [self _rightViewDeploymentForNewFrontViewPosition:newPosition];
     void (^frontDeploymentCompletion)() = [self _frontViewDeploymentForNewFrontViewPosition:newPosition];
-    
+
+    // Disable Touch on frontViewController
+    if (newPosition == FrontViewPositionRight) {
+
+        if ([_frontViewController respondsToSelector:@selector(visibleViewController)]) {
+            UINavigationController* nav = (UINavigationController*) _frontViewController;
+            nav.visibleViewController.view.userInteractionEnabled = NO;
+        } else {
+            [_frontViewController.view setUserInteractionEnabled:NO];
+        }
+
+    } else {
+        if ([_frontViewController respondsToSelector:@selector(visibleViewController)]) {
+            UINavigationController* nav = (UINavigationController*) _frontViewController;
+            nav.visibleViewController.view.userInteractionEnabled = YES;
+        } else {
+            [_frontViewController.view setUserInteractionEnabled:YES];
+        }
+        
+        
+    }
+
     void (^animations)() = ^()
     {
         // We call the layoutSubviews method on the contentView view and send a delegate, which will
