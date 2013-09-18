@@ -127,6 +127,9 @@ typedef enum
 // The rearViewController will still appear full size and blurred behind the navigation bar of its UINavigationController grand parent
 @property (assign, nonatomic) BOOL presentFrontViewHierarchically;
 
+// The frontViewController will still appear without shadow
+@property (assign, nonatomic) BOOL frontViewWhithoutShadow;
+
 // Velocity required for the controller to toggle its state based on a swipe movement, default is 300
 @property (assign, nonatomic) CGFloat quickFlickVelocity;
 
